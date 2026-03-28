@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.model.Book;
 import com.example.demo.repo.BookRepo;
 
@@ -35,14 +36,25 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Optional<Book> getBook(int bookId) {
-		// TODO Auto-generated method stub
-		return bookRepo.getBook(bookId);
+		Optional<Book> book = bookRepo.getBook(bookId);
+
+	    if(book == null) {
+	        throw new BookNotFoundException("Book not found with id " + bookId);
+	    }
+
+	    return book;
 	}
 
 	@Override
-	public boolean updateBook(Book book, int bookId) {
-		// TODO Auto-generated method stub
-		return bookRepo.updateBook(book, bookId);
+	public boolean updateBook(Book book, int id) {
+
+	    boolean result = bookRepo.updateBook(book, id);
+
+	    if(!result) {
+	        throw new BookNotFoundException("Book not found with id " + id);
+	    }
+
+	    return true;
 	}
 
 	@Override
@@ -53,8 +65,14 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public boolean deleteBookById(int id) {
-		// TODO Auto-generated method stub
-		return bookRepo.deleteBookById(id);
+
+	    boolean result = bookRepo.deleteBookById(id);
+
+	    if(!result) {
+	        throw new BookNotFoundException("Book not found with id " + id);
+	    }
+
+	    return true;
 	}
 
 }

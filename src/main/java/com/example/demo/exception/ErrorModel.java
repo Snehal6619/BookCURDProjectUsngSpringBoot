@@ -2,19 +2,19 @@ package com.example.demo.exception;
 
 public class ErrorModel {
 
-	private int statusCode;
-	private String errorMassage;
-	public int getStatusCode() {
-		return statusCode;
-	}
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
-	public String getErrorMassage() {
-		return errorMassage;
-	}
-	public void setErrorMassage(String errorMassage) {
-		this.errorMassage = errorMassage;
-	}
-	
+    private int statusCode;
+    private String message;
+
+    public ErrorModel(int statusCode, String message) {
+        this.statusCode = statusCode;
+        this.message = message;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
